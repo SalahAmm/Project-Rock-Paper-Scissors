@@ -19,52 +19,52 @@ function getComputerChoice() {
 }
 // call the computer function
 
-
 //player input data
 function getHumanChoice() {
   let result = prompt("enter Rock - Paper - Scissors").toLowerCase();
   return result;
 }
 
-
-
 // Write the logic to play a single round
 
-//write the variable of each value of choice
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 //2---------
+
 function playRound(humanChoice, computerChoice) {
-  let win = `You Win ${humanChoice} Beat ${computerChoice}`;
-  let lose = `ou lose! ${computerChoice} beats ${humanChoice}`;
-  let draw = "Draw";
+  const win = `You Win ${humanChoice} Beat ${computerChoice}`;
+  const lose = `You lose! ${computerChoice} beats ${humanChoice}`;
+  const draw = "Draw";
 
   if (humanChoice === computerChoice) {
-
-    return {result: draw , humanScore , computerScore};
+    return { result: draw, humanScore, computerScore };
   } else if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     humanScore += 1;
-    return {result: win , humanScore , computerScore};
+    return { result: win, humanScore, computerScore };
   } else {
     computerScore += 1;
-    return {result: lose, humanScore, computerScore};
-  };
+    return { result: lose, humanScore, computerScore };
   }
-
-
-console.log(playRound(humanSelection , computerSelection))
-
-function points() {
-  let result = playRound();
-  points = `you have ${result.humanScore} Points = and the Computer has ${result.computerScore} Point`;
-    return points ;
 }
 
-console.log(points());
 
 
 
+
+//how many round it repeats until stop
+
+function playGame(rounds) {
+  if (rounds === 0) {
+    return;
+  }
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+  roundResult = playRound(humanSelection, computerSelection);
+  console.log(roundResult.result);
+  console.log(`you have ${roundResult.humanScore} Points = and the Computer has ${roundResult.computerScore} Point`);
+  playGame(rounds - 1);
+}
+
+playGame(5);
