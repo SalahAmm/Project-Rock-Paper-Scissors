@@ -21,7 +21,8 @@ function getComputerChoice() {
 
 //player input data
 function getHumanChoice() {
-  let result = prompt("enter Rock - Paper - Scissors").toLowerCase();
+  let input = prompt("enter Rock - Paper - Scissors")
+  let result = input.toLowerCase();
   return result;
 }
 
@@ -66,5 +67,9 @@ function playGame(rounds) {
   console.log(`you have ${roundResult.humanScore} Points = and the Computer has ${roundResult.computerScore} Point`);
   playGame(rounds - 1);
 }
+function startGame(){
+  playGame(5);
+}
 
-playGame(5);
+
+

@@ -1,0 +1,30 @@
+body {
+    background-color: #929982;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.heading {
+    background-color: #002500;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+h1 {
+
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    padding: 20px;
+    border-radius: 20px;
+    color: #929982;
+    background-color: #EDCBB1;
+    font-weight: bold;
+    font-size: 20px;
+}
