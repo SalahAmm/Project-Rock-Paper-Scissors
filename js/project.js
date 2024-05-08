@@ -2,33 +2,69 @@
 
 let humanScore = 0;
 let computerScore = 0;
+let roundPlayed = 0;
+const maxRound = 5;
 
-// write a function that give 3 different number.
-//each number have a string value ("paper" , "rock" , "scissors");
+//player input
+
+const rockButton = document.getElementById('rock')
+const paperButton = document.getElementById('paper')
+const scissorsButton = document.getElementById('scissors')
+const divResult = document.getElementById('results')
+
+rockButton.addEventListener('click' , () => {
+  const computerChoice = getComputerChoice();
+  const text = "rock";
+  const result = playRound(text ,computerChoice)
+  updateUi(result);
+});
+paperButton.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const text = "paper";
+  const result = playRound(text , computerChoice)
+  updateUi(result);
+});
+scissorsButton.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const text = "scissors";
+  const result = playRound(text , computerChoice)
+  updateUi(result);
+});
+
+//result data
+function updateUi (result) {
+  for (i= 0 ; i < 6 ;i++){
+    divResult.textContent = `${result.result} , Your Score is ${result.humanScore} And Computer score is ${result.computerScore}`;
+    if(roundPlayed > 5 ) 
+    {
+      divResult.textContent = '';
+    } else if (roundPlayed === maxRound) {
+      let finalResult = winner(result.humanScore ,result.computerScore);
+      divResult.textContent = finalResult;
+  
+    }
+
+    }
+
+}
+
+//computer input
+
 function getComputerChoice() {
-  result = Math.floor(Math.random() * 3);
+  let result = Math.floor(Math.random() * 3);
   if (result == 0) {
-    result = "paper";
+     return "paper";
   } else if (result == 2) {
-    result = "rock";
+    return "rock";
   } else if (result == 1) {
-    result = "scissors";
+    return "scissors";
   }
-  // make the result show only the string;
-  return result;
-}
-// call the computer function
 
-//player input data
-function getHumanChoice() {
-  let input = prompt("enter Rock - Paper - Scissors")
-  let result = input.toLowerCase();
-  return result;
+
 }
 
-// Write the logic to play a single round
-
-//2---------
+//Count the Score And Rounds 
+//To know who win each round
 
 function playRound(humanChoice, computerChoice) {
   const win = `You Win ${humanChoice} Beat ${computerChoice}`;
@@ -43,33 +79,25 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     humanScore += 1;
+    roundPlayed += 1;
+
     return { result: win, humanScore, computerScore };
   } else {
     computerScore += 1;
+    roundPlayed += 1;
     return { result: lose, humanScore, computerScore };
   }
 }
 
 
+function winner (humanScore , computerScore) {
 
+    if(humanScore > computerScore) {
+  return `After 5 round You are the final Winner`
+    }else if (computerScore > humanScore) {
+    return `After 5 round You Lose`
+    } else {
+      return "after 5 round , its Draw"
+    }
 
-
-//how many round it repeats until stop
-
-function playGame(rounds) {
-  if (rounds === 0) {
-    return;
-  }
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-  roundResult = playRound(humanSelection, computerSelection);
-  console.log(roundResult.result);
-  console.log(`you have ${roundResult.humanScore} Points = and the Computer has ${roundResult.computerScore} Point`);
-  playGame(rounds - 1);
 }
-function startGame(){
-  playGame(5);
-}
-
-
-
