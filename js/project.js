@@ -99,5 +99,5 @@ function winner (humanScore , computerScore) {
     } else {
       return "after 5 round , its Draw"
     }
- 
+    
 }
